@@ -3,7 +3,7 @@ from tkinter import *
 import random
 import sys
 pygame.init()   
-
+pygame.mixer.init()
 pygame.joystick.init()
 Tk().wm_withdraw() #to hide the main window
 largeur_e=1000  
@@ -14,7 +14,8 @@ player = pygame.image.load("perso_red.png")
 player1 = pygame.image.load("perso_teal.png")
 font = pygame.font.SysFont(None, 36)
 score = 0
-
+pygame.mixer.music.load("Boss.mp3")
+pygame.mixer.music.play(-1)
 player_x=(largeur_e-player.get_width())//2
 player_y=(hauteur_e-player.get_height())//2
 player1_x=(largeur_e-player1.get_width())//1
@@ -101,6 +102,10 @@ while running:
         player1_y+=v
         if player1_y> hauteur_e-player1.get_height():
             player1_y= hauteur_e-player1.get_height()
+    if keys[pygame.K_LSHIFT]:
+        v+=3
+    if keys[pygame.K_RSHIFT]:
+        v-=3
     if ( keys[pygame.K_SPACE] ) :
         print("player1_x : ",player1_x)
         print("player_x : ",player_x)
@@ -116,13 +121,12 @@ while running:
         player_x = player_y =0
         player1_x = random.randint(0,largeur_e - player1.get_width())
         player1_y = random.randint(0,hauteur_e - player1.get_width())
-
+    if score==20:
+        running=False
     screen.blit(over(score), (10, 50))
     screen.blit(player,(player_x,player_y))
     screen.blit(player1,(player1_x,player1_y))
-    screen.blit(score_text, (10, 10)) 
-
-
+    screen.blit(score_text, (10, 10))  
     pygame.display.flip()
 
 pygame.quit()
