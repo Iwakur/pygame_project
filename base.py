@@ -5,7 +5,7 @@ import sys
 pygame.init()   
 pygame.mixer.init()
 pygame.joystick.init()
-Tk().wm_withdraw() #to hide the main window
+Tk().wm_withdraw() 
 largeur_e=1000  
 hauteur_e=900
 screen = pygame.display.set_mode((largeur_e,hauteur_e))
